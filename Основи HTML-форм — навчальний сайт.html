@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Основи HTML-форм — навчальні матеріали</title>
+<style>
+:root{--bg:#f6f8fb;--panel:#fff;--ink:#1d2733;--muted:#586577;--line:#ccd5e0;--accent:#1f5fae;--code:#eef2f7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14181e;--panel:#1c222b;--ink:#e6ebf1;--muted:#9aa7b7;--line:#34404e;--accent:#7fb2ee;--code:#242c37;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14181e;--panel:#1c222b;--ink:#e6ebf1;--muted:#9aa7b7;--line:#34404e;--accent:#7fb2ee;--code:#242c37;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65}
+header{background:var(--accent);color:#fff;padding:18px 20px}
+header h1{margin:0;font:700 1.25rem/1.3 Verdana,Geneva,sans-serif}
+header p{margin:2px 0 0;font:.85rem Verdana,sans-serif;opacity:.9}
+nav{display:flex;flex-wrap:wrap;gap:4px;padding:8px 14px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px)}
+nav a{font:.9rem Verdana,sans-serif;padding:6px 12px;border-radius:4px;color:var(--ink);text-decoration:none}
+nav a[aria-current=page]{background:var(--accent);color:#fff}
+nav a:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #f2a900;outline-offset:2px}
+main{max-width:760px;margin:0 auto;padding:24px 18px 48px}
+section{display:none}section.on{display:block}
+h2{font:700 1.5rem/1.3 Verdana,sans-serif;margin:.2em 0 .6em}
+h3{font:700 1.1rem/1.3 Verdana,sans-serif;margin:1.6em 0 .4em}
+a{color:var(--accent)}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code)}
+code{background:var(--code);padding:1px 5px;border-radius:3px;font-size:.9em}
+pre{background:var(--code);padding:14px;border-radius:5px;overflow-x:auto;font-size:.85rem;line-height:1.5}
+pre code{background:none;padding:0}
+.demo{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px 20px}
+fieldset{border:1px solid var(--line);border-radius:4px;margin:0 0 12px;padding:8px 14px 12px}
+legend{padding:0 6px;color:var(--muted)}
+.demo label{margin-right:8px}
+.demo input[type=text],.demo input[type=password],.demo select,.demo textarea{font:inherit;padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--ink)}
+.demo button{font:inherit;padding:4px 14px;margin-right:6px;border:1px solid var(--line);border-radius:3px;background:var(--code);color:var(--ink);cursor:pointer}
+details{background:var(--panel);border:1px solid var(--line);border-radius:5px;margin:8px 0;padding:8px 14px}
+summary{cursor:pointer;font-weight:bold}
+ul.go{padding-left:1.2em}
+footer{max-width:760px;margin:0 auto;padding:0 18px 28px;color:var(--muted);font:.8rem Verdana,sans-serif}
+</style>
+</head>
+<body>
+<header><h1>Основи HTML-форм</h1><p>Навчальні матеріали з інформатики · Горлов Владислав Іванович, група 33</p></header>
+<nav id="nav" aria-label="Розділи сайту">
+<a href="#home">Головна</a><a href="#teoriya">Теорія</a><a href="#praktyka">Практика</a><a href="#test">Самоперевірка</a><a href="#resursy">Джерела</a>
+</nav>
+<main>
+
+<section id="home">
+<h2>Вітаю на сайті про HTML-форми</h2>
+<p>Форми дозволяють користувачеві надсилати дані на сервер: логін і пароль, відповіді в анкеті, коментар чи файл. На сайті зібрано матеріали, які допоможуть розібратися з формами від нуля до готової анкети.</p>
+<h3>Що тут є</h3>
+<ul class="go">
+<li><a href="#teoriya">Теорія</a>: тег form, основні поля введення та їхні атрибути.</li>
+<li><a href="#praktyka">Практика</a>: готовий код анкети й така сама форма, яку можна випробувати.</li>
+<li><a href="#test">Самоперевірка</a>: п’ять запитань із відповідями.</li>
+<li><a href="#resursy">Джерела</a>: де читати далі.</li>
+</ul>
+</section>
+
+<section id="teoriya">
+<h2>Теорія</h2>
+<h3>Тег form</h3>
+<p>Тег <code>&lt;form&gt;</code> відзначає початок і кінець форми. Форм на сторінці може бути кілька, але вкладати їх одну в одну не можна.</p>
+<div class="wrap"><table>
+<tr><th>Атрибут</th><th>Призначення</th></tr>
+<tr><td><code>action</code></td><td>файл, який обробить дані форми</td></tr>
+<tr><td><code>method</code></td><td>метод запиту: GET (за замовчуванням) або POST</td></tr>
+<tr><td><code>target</code></td><td>де показати результат: у поточному вікні чи новій вкладці</td></tr>
+<tr><td><code>autocomplete</code></td><td>керує автозаповненням полів</td></tr>
+</table></div>
+<h3>Поля введення</h3>
+<p>Тег <code>&lt;input&gt;</code> одиночний. Тип поля задає <code>type</code>, ім’я для сервера — <code>name</code>, значення — <code>value</code>.</p>
+<div class="wrap"><table>
+<tr><th>type</th><th>Що створює</th></tr>
+<tr><td><code>text</code></td><td>однорядкове текстове поле</td></tr>
+<tr><td><code>password</code></td><td>поле пароля, символи замінюються крапками</td></tr>
+<tr><td><code>radio</code></td><td>перемикач; із групи з однаковим <code>name</code> обирається лише один</td></tr>
+<tr><td><code>checkbox</code></td><td>прапорець із двома станами</td></tr>
+<tr><td><code>submit</code> / <code>reset</code></td><td>кнопки відправки та очищення форми</td></tr>
+<tr><td><code>hidden</code></td><td>приховане поле, яке передається на сервер</td></tr>
+<tr><td><code>file</code></td><td>вибір файлу для завантаження</td></tr>
+</table></div>
+<h3>Інші елементи й атрибути</h3>
+<p><code>&lt;select&gt;</code> з <code>&lt;option&gt;</code> створює випадаючий список; <code>selected</code> робить пункт обраним за замовчуванням, <code>multiple</code> дозволяє вибрати кілька пунктів. <code>&lt;textarea rows cols&gt;</code> — багаторядкове поле. <code>&lt;fieldset&gt;</code> з <code>&lt;legend&gt;</code> групує елементи під спільним заголовком. Атрибут <code>maxlength</code> обмежує довжину тексту, <code>size</code> задає ширину поля, <code>checked</code> позначає обраний елемент, <code>disabled</code> робить елемент неактивним, а <code>readonly</code> забороняє змінювати значення.</p>
+</section>
+
+<section id="praktyka">
+<h2>Практика</h2>
+<p>Анкета з двома групами полів. Спробуйте заповнити її праворуч від коду або нижче на вузькому екрані.</p>
+<pre><code>&lt;form action="#" method="post"&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Особисті дані&lt;/legend&gt;
+    &lt;label for="n"&gt;Ім’я:&lt;/label&gt;
+    &lt;input type="text" id="n" name="name" size="20" maxlength="30"&gt;
+    &lt;input type="radio" name="gender" value="m"&gt; Чоловік
+    &lt;input type="radio" name="gender" value="f"&gt; Жінка
+    &lt;select name="age"&gt;
+      &lt;option value="u18" selected&gt;до 18&lt;/option&gt;
+      &lt;option value="18+"&gt;18 і старше&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Мови&lt;/legend&gt;
+    &lt;input type="checkbox" name="lang" value="java"&gt; Java
+    &lt;input type="checkbox" name="lang" value="cs"&gt; C#
+  &lt;/fieldset&gt;
+  &lt;input type="submit" value="Надіслати"&gt;
+  &lt;input type="reset" value="Очистити"&gt;
+&lt;/form&gt;</code></pre>
+<form class="demo" id="demo">
+<fieldset><legend>Особисті дані</legend>
+<p><label for="n">Ім’я:</label><input type="text" id="n" name="name" size="20" maxlength="30"></p>
+<p>Стать: <input type="radio" id="m" name="gender" value="m"><label for="m">Чоловік</label><input type="radio" id="f" name="gender" value="f"><label for="f">Жінка</label></p>
+<p><label for="a">Вік:</label><select id="a" name="age"><option value="u18" selected>до 18</option><option value="18+">18 і старше</option></select></p>
+</fieldset>
+<fieldset><legend>Мови програмування</legend>
+<input type="checkbox" id="j" name="lang" value="java"><label for="j">Java</label><input type="checkbox" id="c" name="lang" value="cs"><label for="c">C#</label>
+</fieldset>
+<button type="submit">Надіслати</button><button type="reset">Очистити</button>
+<p id="out" aria-live="polite"></p>
+</form>
+</section>
+
+<section id="test">
+<h2>Самоперевірка</h2>
+<p>Дайте відповідь у думці, потім розкрийте запитання.</p>
+<details><summary>1. Який тег задає групу елементів із заголовком?</summary><p><code>&lt;fieldset&gt;</code> задає групу, а заголовок — вкладений <code>&lt;legend&gt;</code>.</p></details>
+<details><summary>2. Який метод запиту використовується за замовчуванням?</summary><p>GET.</p></details>
+<details><summary>3. Як зробити пункт списку обраним за замовчуванням?</summary><p>Додати до <code>&lt;option&gt;</code> атрибут <code>selected</code>.</p></details>
+<details><summary>4. Чому з кількох перемикачів обирається лише один?</summary><p>Бо вони мають однакове значення атрибута <code>name</code> і утворюють одну групу.</p></details>
+<details><summary>5. Який атрибут обмежує кількість символів у полі?</summary><p><code>maxlength</code>.</p></details>
+</section>
+
+<section id="resursy">
+<h2>Джерела</h2>
+<ul class="go">
+<li><a href="https://uk.wikipedia.org/wiki/Вебпрограмування">Вебпрограмування — Вікіпедія</a></li>
+<li><a href="https://developer.mozilla.org/uk/docs/Learn/Forms">MDN: Вивчення HTML-форм</a></li>
+<li><a href="https://www.w3.org/International/tutorials/language-decl/index.uk.html">W3C: Оголошення мови в HTML</a></li>
+</ul>
+</section>
+
+</main>
+<footer>Автор: Горлов Владислав Іванович, група 33. Лабораторна робота №9.</footer>
+<script>
+(function(){
+var ids=["home","teoriya","praktyka","test","resursy"];
+function show(){
+  var h=(location.hash||"#home").slice(1); if(ids.indexOf(h)<0)h="home";
+  ids.forEach(function(i){document.getElementById(i).classList.toggle("on",i===h)});
+  document.querySelectorAll("#nav a").forEach(function(a){
+    if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
+}
+window.addEventListener("hashchange",show);show();
+var f=document.getElementById("demo");
+f.addEventListener("submit",function(e){e.preventDefault();
+  var n=f.elements.name.value||"без імені";
+  document.getElementById("out").textContent="Форму отримано: "+n+". У справжньому сайті дані пішли б на сервер.";});
+f.addEventListener("reset",function(){document.getElementById("out").textContent="";});
+})();
+</script>
+</body>
+</html>
